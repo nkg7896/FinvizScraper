@@ -4,16 +4,10 @@ import requests
 page = requests.get('https://finviz.com/screener.ashx?v=340&s=ta_toplosers')
 tree = html.fromstring(page.content)
 
-#This will create a list of buyers:
-stocks = tree.xpath('//div[@title="buyer-name"]/text()')
-#<div title="buyer-name">Carson Busses</div>
-#<tr class="table-light2-row"><td class="snapshot-td">Company</td><td class="snapshot-td"><b>Yuma Energy, Inc.</b></td></tr>
-stocks = tree.xpath('//tr[@class="table-light2-row"]/text()')
-#'//tr[@class=""]'
-#yeah"company-name"/text()'
+#Grabs text from html where class="tab-link":
 
+#<a href="http://www.mauiland.com" target="_blank" class="tab-link">Maui Land & Pineapple Company, Inc.</a><br /></b></td></tr>
+stocks = tree.xpath('//a[@class="tab-link"]/text()')
 
-#This will create a list of prices
-#prices = tree.xpath('//span[@class="item-price"]/text()')
 
 print ("Stocks: ", stocks)
